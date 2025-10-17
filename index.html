@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт-визитка</title>
+    <title>Тестировщик бэкенда - [Ваше Имя]</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #34495e;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #27ae60;
         }
         
         * {
@@ -34,10 +35,23 @@
         
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
             padding: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
         }
         
         .profile-img {
@@ -47,6 +61,19 @@
             object-fit: cover;
             border: 5px solid white;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
         
         .header-content h1 {
@@ -58,6 +85,12 @@
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-top: 10px;
+            opacity: 0.9;
         }
         
         /* Navigation */
@@ -79,7 +112,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--primary);
         }
         
         .nav-links {
@@ -93,13 +126,29 @@
         
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
         }
         
         .nav-links a:hover {
-            color: var(--secondary-color);
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
         
         /* Sections */
@@ -110,7 +159,7 @@
         .section-title {
             text-align: center;
             margin-bottom: 50px;
-            color: var(--primary-color);
+            color: var(--primary);
         }
         
         .section-title h2 {
@@ -128,7 +177,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
         }
         
         /* About */
@@ -166,6 +215,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
+            border-top: 4px solid var(--secondary);
         }
         
         .skill-card:hover {
@@ -173,8 +223,15 @@
         }
         
         .skill-card h3 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-card h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
         }
         
         .skill-card ul {
@@ -183,6 +240,85 @@
         
         .skill-card li {
             margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .skill-card li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        /* Experience */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            border: 4px solid var(--secondary);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -10px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-company {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
         }
         
         /* Projects */
@@ -206,12 +342,25 @@
         
         .project-img {
             height: 200px;
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-img::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
         }
         
         .project-content {
@@ -219,8 +368,23 @@
         }
         
         .project-content h3 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .project-tag {
+            background: var(--light);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            color: var(--dark);
         }
         
         .project-links {
@@ -230,16 +394,28 @@
         .btn {
             display: inline-block;
             padding: 8px 15px;
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
             color: white;
             text-decoration: none;
             border-radius: 5px;
             margin-right: 10px;
             transition: background-color 0.3s;
+            font-size: 0.9rem;
         }
         
         .btn:hover {
-            background-color: var(--primary-color);
+            background-color: var(--primary);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
         }
         
         /* Contact */
@@ -265,13 +441,14 @@
         .contact-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
+            flex-shrink: 0;
         }
         
         .form-group {
@@ -281,7 +458,8 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            color: var(--dark-color);
+            color: var(--dark);
+            font-weight: 500;
         }
         
         .form-group input,
@@ -290,6 +468,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-family: inherit;
         }
         
         .form-group textarea {
@@ -298,22 +477,23 @@
         }
         
         .submit-btn {
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
             color: white;
             border: none;
             padding: 12px 25px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 1rem;
         }
         
         .submit-btn:hover {
-            background-color: var(--primary-color);
+            background-color: var(--primary);
         }
         
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background-color: var(--primary);
             color: white;
             padding: 40px 0;
             text-align: center;
@@ -339,7 +519,7 @@
         }
         
         .social-links a:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--secondary);
         }
         
         /* Responsive */
@@ -371,6 +551,25 @@
             section {
                 padding: 60px 0;
             }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-content::after {
+                left: 15px;
+                right: auto;
+            }
         }
     </style>
 </head>
@@ -378,10 +577,11 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <img src="https://via.placeholder.com/150" alt="Фото профиля" class="profile-img">
+            <div class="profile-img">Ваше фото</div>
             <div class="header-content">
-                <h1>Иван Иванов</h1>
-                <p>Frontend разработчик | Веб-дизайнер | UI/UX специалист</p>
+                <h1>Алексей Петров</h1>
+                <p>Тестировщик бэкенда / QA Engineer</p>
+                <p class="tagline">Обеспечиваю качество и надежность серверной части приложений</p>
             </div>
         </div>
     </header>
@@ -389,10 +589,11 @@
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
-            <div class="logo">Портфолио</div>
+            <div class="logo">QA Portfolio</div>
             <ul class="nav-links">
                 <li><a href="#about">Обо мне</a></li>
                 <li><a href="#skills">Навыки</a></li>
+                <li><a href="#experience">Опыт</a></li>
                 <li><a href="#projects">Проекты</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
@@ -407,12 +608,14 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Привет! Я фронтенд разработчик с 3-летним опытом создания современных веб-приложений. Специализируюсь на HTML, CSS, JavaScript и React.</p>
-                    <p>Я увлечен созданием интуитивных и красивых интерфейсов, которые обеспечивают отличный пользовательский опыт. Постоянно изучаю новые технологии и подходы к разработке.</p>
-                    <p>В свободное время люблю читать технические блоги, участвовать в хакатонах и работать над личными проектами.</p>
+                    <p>Я - тестировщик бэкенда с 4-летним опытом обеспечения качества серверной части веб-приложений и API. Специализируюсь на тестировании REST API, баз данных, производительности и безопасности.</p>
+                    <p>Мой подход к тестированию включает не только поиск дефектов, но и анализ архитектурных решений для предотвращения проблем на ранних этапах разработки.</p>
+                    <p>Владею современными инструментами автоматизации тестирования и методологиями обеспечения качества. Постоянно совершенствую свои навыки и изучаю новые технологии.</p>
                 </div>
                 <div class="about-img">
-                    <img src="https://via.placeholder.com/400x300" alt="Рабочее место">
+                    <div style="width: 100%; height: 300px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #666;">
+                        Изображение рабочего процесса
+                    </div>
                 </div>
             </div>
         </div>
@@ -426,34 +629,79 @@
             </div>
             <div class="skills-container">
                 <div class="skill-card">
-                    <h3>Frontend разработка</h3>
+                    <h3>🔧 Тестирование API</h3>
                     <ul>
-                        <li>HTML5, CSS3, JavaScript (ES6+)</li>
-                        <li>React, Vue.js</li>
-                        <li>Responsive Web Design</li>
-                        <li>Bootstrap, Tailwind CSS</li>
-                        <li>Webpack, Vite</li>
+                        <li>REST API тестирование (Postman, Insomnia)</li>
+                        <li>SOAP Web Services</li>
+                        <li>GraphQL</li>
+                        <li>Валидация JSON/XML схем</li>
+                        <li>Тестирование авторизации (OAuth, JWT)</li>
                     </ul>
                 </div>
                 <div class="skill-card">
-                    <h3>Backend разработка</h3>
+                    <h3>⚙️ Автоматизация</h3>
                     <ul>
-                        <li>Node.js, Express</li>
-                        <li>PHP, Laravel</li>
-                        <li>RESTful API</li>
-                        <li>MySQL, MongoDB</li>
-                        <li>Git, GitHub</li>
+                        <li>Python + pytest</li>
+                        <li>Java + TestNG/JUnit</li>
+                        <li>Selenium WebDriver</li>
+                        <li>JMeter для нагрузочного тестирования</li>
+                        <li>Docker для тестовых окружений</li>
                     </ul>
                 </div>
                 <div class="skill-card">
-                    <h3>Дизайн</h3>
+                    <h3>🗄️ Базы данных</h3>
                     <ul>
-                        <li>UI/UX Design</li>
-                        <li>Figma, Adobe XD</li>
-                        <li>Adobe Photoshop</li>
-                        <li>Прототипирование</li>
-                        <li>Анимация интерфейсов</li>
+                        <li>SQL (MySQL, PostgreSQL)</li>
+                        <li>NoSQL (MongoDB, Redis)</li>
+                        <li>Тестирование миграций БД</li>
+                        <li>Валидация целостности данных</li>
+                        <li>Оптимизация запросов</li>
                     </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🔍 Методологии</h3>
+                    <ul>
+                        <li>Agile/Scrum методологии</li>
+                        <li>Написание тестовой документации</li>
+                        <li>Анализ требований и рисков</li>
+                        <li>Тест-дизайн и техники тестирования</li>
+                        <li>CI/CD интеграция тестов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Опыт работы</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - настоящее время</div>
+                        <div class="timeline-company">TechSolutions Inc.</div>
+                        <p>Senior Backend QA Engineer</p>
+                        <p>Разработал и внедрил стратегию тестирования API для микросервисной архитектуры. Создал фреймворк автоматизации тестирования на Python, что сократило время регрессионного тестирования на 40%.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <div class="timeline-company">DataSystems LLC</div>
+                        <p>QA Engineer</p>
+                        <p>Тестирование REST API и баз данных для платформы анализа больших данных. Разработал сценарии нагрузочного тестирования, которые выявили узкие места производительности.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <div class="timeline-company">WebInnovations</div>
+                        <p>Junior QA Engineer</p>
+                        <p>Начал карьеру в тестировании, занимался функциональным тестированием веб-приложений. Освоил основы тестирования API и автоматизации.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -463,39 +711,56 @@
     <section id="projects">
         <div class="container">
             <div class="section-title">
-                <h2>Мои проекты</h2>
+                <h2>Проекты</h2>
             </div>
             <div class="projects-container">
                 <div class="project-card">
-                    <div class="project-img">Изображение проекта</div>
+                    <div class="project-img">API Testing Framework</div>
                     <div class="project-content">
-                        <h3>Интернет-магазин</h3>
-                        <p>Полнофункциональный интернет-магазин с корзиной, фильтрами товаров и системой оплаты.</p>
+                        <h3>Фреймворк тестирования API</h3>
+                        <p>Автоматизированный фреймворк для тестирования REST API с поддержкой различных типов аутентификации и валидации ответов.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">pytest</span>
+                            <span class="project-tag">Requests</span>
+                            <span class="project-tag">Docker</span>
+                        </div>
                         <div class="project-links">
-                            <a href="#" class="btn">Демо</a>
-                            <a href="#" class="btn">Код</a>
+                            <a href="#" class="btn">Подробнее</a>
+                            <a href="#" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
-                    <div class="project-img">Изображение проекта</div>
+                    <div class="project-img">Load Testing</div>
                     <div class="project-content">
-                        <h3>Приложение для заметок</h3>
-                        <p>Веб-приложение для создания и организации заметок с возможностью синхронизации между устройствами.</p>
+                        <h3>Нагрузочное тестирование</h3>
+                        <p>Сценарии нагрузочного тестирования для выявления узких мест производительности API и определения пределов масштабируемости.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">JMeter</span>
+                            <span class="project-tag">Grafana</span>
+                            <span class="project-tag">InfluxDB</span>
+                        </div>
                         <div class="project-links">
-                            <a href="#" class="btn">Демо</a>
-                            <a href="#" class="btn">Код</a>
+                            <a href="#" class="btn">Подробнее</a>
+                            <a href="#" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
-                    <div class="project-img">Изображение проекта</div>
+                    <div class="project-img">DB Testing</div>
                     <div class="project-content">
-                        <h3>Портфолио фотографа</h3>
-                        <p>Сайт-портфолио для фотографа с галереей работ, блогом и системой бронирования съемок.</p>
+                        <h3>Тестирование баз данных</h3>
+                        <p>Набор скриптов для тестирования целостности данных, производительности запросов и корректности миграций БД.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">SQL</span>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">PostgreSQL</span>
+                        </div>
                         <div class="project-links">
-                            <a href="#" class="btn">Демо</a>
-                            <a href="#" class="btn">Код</a>
+                            <a href="#" class="btn">Подробнее</a>
+                            <a href="#" class="btn btn-outline">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -515,7 +780,7 @@
                         <div class="contact-icon">@</div>
                         <div>
                             <h3>Email</h3>
-                            <p>ivan@example.com</p>
+                            <p>alexey.petrov@example.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -532,9 +797,16 @@
                             <p>Москва, Россия</p>
                         </div>
                     </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">G</div>
+                        <div>
+                            <h3>GitHub</h3>
+                            <p>github.com/alexey-petrov</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Имя</label>
                             <input type="text" id="name" required>
@@ -561,9 +833,9 @@
                 <a href="#">GitHub</a>
                 <a href="#">LinkedIn</a>
                 <a href="#">Telegram</a>
-                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
             </div>
-            <p>&copy; 2023 Иван Иванов. Все права защищены.</p>
+            <p>&copy; 2023 Алексей Петров. Тестировщик бэкенда.</p>
         </div>
     </footer>
 
@@ -587,7 +859,7 @@
         });
         
         // Простая валидация формы
-        const contactForm = document.querySelector('form');
+        const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -595,6 +867,16 @@
                 this.reset();
             });
         }
+        
+        // Добавление класса при скролле для навигации
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
     </script>
 </body>
 </html>
