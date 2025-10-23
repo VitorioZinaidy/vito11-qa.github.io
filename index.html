@@ -56,21 +56,26 @@
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            background: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden; /* Важно: обрезает всё что выходит за круг */
+    border: 5px solid white;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    background: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Это должно быть у изображения */
+    object-position: center; /* Центрирует фото */
+}
         
         .header-content {
             position: relative;
@@ -882,6 +887,7 @@
     </script>
 </body>
 </html>
+
 
 
 
